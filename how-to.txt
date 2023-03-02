@@ -1,0 +1,14 @@
+1, build
+1.1 prerequisite: sudo apt-get install llvm clang
+1.2 compile executor: cd /path/to/ebpf_vm; mkdir build; cd build; cmake ..; make
+1.3 compile ebpf program: cd /path/to/ebpf_vm/ebpf_example; make
+
+2, setup rdma environment
+2.1 change mtu of ethernet adapter: sudo ifconfig enp0s8 mtu 4200
+2.2 create roce adapter: sudo rdma link add rxe_0 type rxe netdev enp0s8
+
+3, run ebpf vm
+3.1 suppose server is 192.168.100.10, and client is 192.168.100.20
+3.2 run server: /path/to/ebpf_vm/build/ebpf_vm_test/vm_test -a 192.168.100.10 -p 1881 -d rxe_0 -i 1 -s 4096 -r 128 -g 1 -t 0
+3.3 run client: /path/to/ebpf_vm/build/ebpf_vm_test/vm_test -a 192.168.100.10 -p 1881 -d rxe_0 -i 1 -s 4096 -r 128 -g 1 -t 0 -f /path/to/ebpf_vm/ebpf_example/vm_migrate.o
+
