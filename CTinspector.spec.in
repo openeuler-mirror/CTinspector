@@ -1,0 +1,58 @@
+
+
+%define rel_version  @CPACK_PACKAGE_VERSION@
+%define rel_release  @CPACK_PACKAGE_RELEASE@
+%define bin_dir      @BIN_INSTALL_PREFIX@
+%define lib_dir      @LIB_INSTALL_PREFIX@
+%define header_dir   @INCLUDE_INSTALL_PREFIX@
+
+Name:           ctinspector
+Version:        %{rel_version}
+Release:        %{rel_release}%{?dist}
+Summary:        CTyunOS Inspector
+License:        GPLv2+
+URL:            https://gitee.com/openeuler/CTinspector
+Source0:        ctinspector-%{rel_version}.tar.bz2
+
+BuildRequires:  elfutils-devel
+BuildRequires:  rdma-core-devel
+BuildRequires:  llvm clang
+BuildRequires:  libbpf
+BuildRequires:  cmake make
+
+%description
+Multipule nodes ebpf flow inspector, which is initialed by CTyun.
+
+
+%prep
+%autosetup -n ctinspector-%{rel_version}
+
+
+%build
+mkdir build
+pushd build
+cmake ..
+make
+popd
+
+
+%install
+rm -rf $RPM_BUILD_ROOT
+cd build
+%make_install
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+
+%files
+%{bin_dir}/*
+%{lib_dir}/*
+%{header_dir}/*
+
+
+
+%changelog
+* Thu Mar 16 2023 yangt111@chinatelecom.cn
+- Init spec to build on CTyunOS 3. 
