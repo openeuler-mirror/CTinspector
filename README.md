@@ -1,29 +1,45 @@
 # CTinspector
 
 #### 介绍
-multipule nodes ebpf flow inspector, initialed by CTyun
+CTinspector是天翼云公司自主创新研发基于ebpf指令集的语言虚拟机运行框架。
+基于CTinspector运行框架可以快速拓展其应用实例用于诊断网络性能瓶颈点，诊断存储IO处理
+的热点和负载均衡等，提高系统运行时诊断的稳定性和时效性。
 
 #### 软件架构
-软件架构说明
+![CTinspector架构](./ctinpsector_arch.png)
 
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  编译安装框架  
+    mkdir build   
+    cd build  
+    make  
+    make install  
+    
+2.  编译安装运行实例  
+    cd ebpf_example  
+    make   
+    
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+以运行migrate实例为例： 
+
+1.  Node1上运行  
+ ./ebpf vm test/vm test -a 192.168.18.206 -p 1881 -d rxe_0 -i 1 -5 4096  
+2.  Node2上运行  
+ ./ebpf vm test/vm test -a 192.168.18.208 -p 1881 -d rxe_0 -i 1 -s 4096 -r 1287 -g 1 -t 0  
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
+1.  Fork 本仓库 
+2.  新建 Feat_xxx 分支  
+    git clone https://gitee.com/openeuler/CTinspector.git  
+    git checkout -b Feat_xxx  
+3.  提交代码  
+    git commit -m ""  
+    git push origin   
 4.  新建 Pull Request
 
 
