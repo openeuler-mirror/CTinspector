@@ -5,6 +5,7 @@
 %define bin_dir      @BIN_INSTALL_PREFIX@
 %define lib_dir      @LIB_INSTALL_PREFIX@
 %define header_dir   @INCLUDE_INSTALL_PREFIX@
+%define data_dir     @DATA_DIR_PREFIX@
 
 Name:           ctinspector
 Version:        %{rel_version}
@@ -40,6 +41,9 @@ popd
 rm -rf $RPM_BUILD_ROOT
 cd build
 %make_install
+mkdir -p %_buildrootdir/%name-%version-%{release}.x86_64/usr/share/%name
+cp %_builddir/%name-%version/ebpf_example %_buildrootdir/%name-%version-%{release}.x86_64/usr/share/%name/ -r
+
 
 %post -p /sbin/ldconfig
 
@@ -50,6 +54,7 @@ cd build
 %{bin_dir}/*
 %{lib_dir}/*
 %{header_dir}/*
+%{data_dir}/*
 
 
 

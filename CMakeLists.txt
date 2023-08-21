@@ -4,12 +4,12 @@ cmake_minimum_required(VERSION 3.12.1)
 project(ebpf_vm)
 
 set(VERSION "1.0.1")
-set(RELEASE "1")
+set(RELEASE "5")
 
 set(BIN_INSTALL_PREFIX "/usr/bin/")
 set(INCLUDE_INSTALL_PREFIX "/usr/include/ctinspector")
 set(LIB_INSTALL_PREFIX "/usr/lib64/")
-
+set(DATA_DIR_PREFIX "/usr/share/")
 
 
 set(CPACK_PACKAGE_NAME "ctinspector")
